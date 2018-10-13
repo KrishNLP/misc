@@ -143,15 +143,7 @@ def brand_go_ahead(brand_df, brand_name = 'Amazon'):
 			with open(fp, 'r') as json_lines:
 				local_models = [json.loads(line) for line in json_lines if line]
 
-
-			models = json_normalize(local_models)
-			# compare local file to number received by refreshed brand page
-			if len(models) == expected_models:
-				raise ValueError('No new models')
-
-			else:
-				# later used to differentiate new models
-				filter_data = models
+			filter_data = json_normalize(local_models)
 
 		# first page soup
 		brand_soup = lite_request(listing_page)
